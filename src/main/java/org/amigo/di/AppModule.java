@@ -4,13 +4,31 @@ import io.javalin.Javalin;
 import org.amigo.controller.OwnerController;
 import org.amigo.controller.VeterinaryController;
 import org.amigo.controller.UserController;
-import org.amigo.repository.UserRepository;
-import org.amigo.routes.UserRoutes;
-import org.amigo.routes.VeterinaryRoutes;
-import org.amigo.service.UserService;
 import org.amigo.controller.PetController;
 import org.amigo.controller.EstablishmentController;
-
+import org.amigo.controller.VaccineController;
+import org.amigo.controller.VaccineRelController;
+import org.amigo.repository.UserRepository;
+import org.amigo.repository.VeterinaryRepository;
+import org.amigo.repository.OwnerRepository;
+import org.amigo.repository.PetRepository;
+import org.amigo.repository.EstablishmentRepository;
+import org.amigo.repository.VaccineRepository;
+import org.amigo.repository.VaccineRelRepository;
+import org.amigo.routes.UserRoutes;
+import org.amigo.routes.VeterinaryRoutes;
+import org.amigo.routes.OwnerRoutes;
+import org.amigo.routes.PetRoutes;
+import org.amigo.routes.EstablishmentRoutes;
+import org.amigo.routes.VaccineRoutes;
+import org.amigo.routes.VacineRelRoutes;
+import org.amigo.service.UserService;
+import org.amigo.service.VeterinaryService;
+import org.amigo.service.OwnerService;
+import org.amigo.service.PetService;
+import org.amigo.service.EstablishmentService;
+import org.amigo.service.VaccineService;
+import org.amigo.service.VaccineRelService;
 
 public class AppModule {
 
@@ -21,46 +39,45 @@ public class AppModule {
         return new UserRoutes(userController);
     }
 
-    public static VeterinaryRoutes 
-
-    public static void VeterinaryController(Javalin app) {
-        app.post("/veterinary", VeterinaryController::createVeterinary);
-        app.get("/veterinary/all", VeterinaryController::getAllVeterinaries);
-        app.delete("/veterinary/{id}",VeterinaryController::deleteVeterinary);
-        app.put("/veterinary", VeterinaryController::update);
-
-        app.post("/owners", OwnerController::createOwner);
-        app.get("/owner/all", OwnerController::getAllOwners);
-        app.delete("/owner/{id}", OwnerController::delete);
-        app.put("/owner", OwnerController::update);
-
-
+    public static VeterinaryRoutes initVeterinary() {
+        VeterinaryRepository veterinaryRepo = new VeterinaryRepository();
+        VeterinaryService veterinaryService = new VeterinaryService(veterinaryRepo);
+        VeterinaryController veterinaryController = new VeterinaryController(veterinaryService);
+        return new VeterinaryRoutes(veterinaryController);
     }
 
-    public static void PetRoutes(Javalin app) {
-        app.post("/pets", PetController::createPet);
-        app.get("/pets/all", PetController::getAllPets);
-        app.get("/pets/{idUser}", PetController::getPetsByUserId);
-        app.delete("pets/{id}", PetController::deletePet);
-        app.put("/pets", PetController::update);
-
+    public static OwnerRoutes initOwner() {
+        OwnerRepository ownerRepo = new OwnerRepository();
+        OwnerService ownerService = new OwnerService(ownerRepo);
+        OwnerController ownerController = new OwnerController(ownerService);
+        return new OwnerRoutes(ownerController);
     }
 
-    public static void EstablishmentController(Javalin app) {
-        app.post("/establishment", org.amigo.controller.EstablishmentController::createEstablishment);
-        app.get("/establishment/all", org.amigo.controller.EstablishmentController::getAllEstablishments);
-        app.delete("/establishment/{id}", EstablishmentController::deleteEstablishment);
-        app.put("/establishment", EstablishmentController::update);
-
+    public static PetRoutes initPet() {
+        PetRepository petRepo = new PetRepository();
+        PetService petService = new PetService(petRepo);
+        PetController petController = new PetController(petService);
+        return new PetRoutes(petController);
     }
 
-    public static void VaccineController(Javalin app) {
-        app.get("/vaccine", org.amigo.controller.VaccineController::getAllVaccines);
+    public static EstablishmentRoutes initEstablishment() {
+        EstablishmentRepository establishmentRepo = new EstablishmentRepository();
+        EstablishmentService establishmentService = new EstablishmentService(establishmentRepo);
+        EstablishmentController establishmentController = new EstablishmentController(establishmentService);
+        return new EstablishmentRoutes(establishmentController);
     }
 
-    public static void VaccineRelController(Javalin app){
-        app.get("/rel", org.amigo.controller.VaccineRelController::getAllRelations);
-        app.post("/rel", org.amigo.controller.VaccineRelController::saveRel);
+    public static VaccineRoutes initVaccine() {
+        VaccineRepository vaccineRepo = new VaccineRepository();
+        VaccineService vaccineService = new VaccineService(vaccineRepo);
+        VaccineController vaccineController = new VaccineController(vaccineService);
+        return new VaccineRoutes(vaccineController);
     }
 
+    public static VaccineRelRoutes initVaccineRel() {
+        VaccineRelRepository vaccineRelRepo = new VaccineRelRepository();
+        VaccineRelService vaccineRelService = new VaccineRelService(vaccineRelRepo);
+        VaccineRelController vaccineRelController = new VaccineRelController(vaccineRelService);
+        return new VaccineRelRoutes(vaccineRelController);
+    }
 }

@@ -17,11 +17,11 @@ public class Main {
         // Rutas generales
         app.get("/", ctx -> ctx.result("MediAmigo"));
         AppModule.initUser().register(app);
-        AppModule.VeterinaryController(app);
-        AppModule.PetRoutes(app);
-        AppModule.EstablishmentController(app);
-        AppModule.VaccineController(app);
-        AppModule.VaccineRelController(app);
+        AppModule.initVeterinary(app);
+        AppModule.initPet(app);
+        AppModule.initEstablishment(app);
+        AppModule.initVaccine(app);
+        AppModule.initVaccineRel(app);
         VeterinaryRoutes.register(app);
     }
 }
