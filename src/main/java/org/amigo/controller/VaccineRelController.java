@@ -2,7 +2,6 @@ package org.amigo.controller;
 
 import com.google.gson.Gson;
 import io.javalin.http.Context;
-import org.amigo.model.Pet;
 import org.amigo.model.VaccineRel;
 import org.amigo.service.VaccineRelService;
 
@@ -11,9 +10,13 @@ import java.util.List;
 
 public class VaccineRelController {
     private static final Gson gson = new Gson();
-    private static final VaccineRelService service = new VaccineRelService();
+    private final VaccineRelService service;
 
-    public static void getAllRelations(Context ctx) {
+    public VaccineRelController(VaccineRelService service) {
+        this.service = service;
+    }
+
+    public void getAllRelations(Context ctx) {
         try {
             List<VaccineRel> vax = service.getAllRels();
             ctx.json(vax);
@@ -22,7 +25,7 @@ public class VaccineRelController {
         }
     }
 
-    public static void saveRel(Context ctx){
+    public void saveRel(Context ctx) {
         try {
             VaccineRel rel = gson.fromJson(ctx.body(), VaccineRel.class);
             service.SaveRel(rel);

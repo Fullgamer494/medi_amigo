@@ -9,8 +9,8 @@ import java.util.List;
 public class PetService {
     private final PetRepository repository;
 
-    public PetService() {
-        this.repository = new PetRepository();
+    public PetService(PetRepository repository) {
+        this.repository = repository;
     }
 
     public void savePet(Pet pet) throws SQLException {
@@ -28,17 +28,17 @@ public class PetService {
         return repository.findMascotasByIdUser(idUser);
     }
 
-    public  boolean deletePet(int idPet) throws SQLException {
+    public boolean deletePet(int idPet) throws SQLException {
         return repository.deletePet(idPet);
     }
 
-    public static boolean update(Pet pet) {
+    // CORREGIDO: Usar instancia del repository en lugar de estático
+    public boolean update(Pet pet) {
         try {
-            return PetRepository.update(pet);
+            return repository.update(pet);
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
-
 }

@@ -4,18 +4,17 @@ import io.javalin.Javalin;
 import org.amigo.controller.PetController;
 
 public class PetRoutes {
-
     private final PetController petController;
-    public PetRoutes(PetController petController){
+
+    public PetRoutes(PetController petController) {
         this.petController = petController;
     }
 
-    public static void register(Javalin app) {
-        app.post("/pets", PetController::createPet);
-        app.get("/pet/all", PetController::getAllPets);
-        app.get("/pets/{idUser}", PetController::getPetsByUserId);
-        app.delete("pet/{id}", PetController::deletePet);
-        app.put("/pet", PetController::update);
-
+    public void register(Javalin app) {
+        app.post("/pets", petController::createPet);
+        app.get("/pet/all", petController::getAllPets);
+        app.get("/pets/{idUser}", petController::getPetsByUserId);
+        app.delete("/pet/{id}", petController::deletePet);
+        app.put("/pet", petController::update);
     }
 }

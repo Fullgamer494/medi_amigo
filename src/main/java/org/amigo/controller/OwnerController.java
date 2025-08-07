@@ -10,9 +10,13 @@ import java.util.List;
 
 public class OwnerController {
     private static final Gson gson = new Gson();
-    private static final OwnerService service = new OwnerService();
+    private final OwnerService service;
 
-    public static void createOwner(Context ctx) {
+    public OwnerController(OwnerService service) {
+        this.service = service;
+    }
+
+    public void createOwner(Context ctx) {
         try {
             Owner owner = gson.fromJson(ctx.body(), Owner.class);
             service.saveOwner(owner);
@@ -22,7 +26,7 @@ public class OwnerController {
         }
     }
 
-    public static void getAllOwners(Context ctx) {
+    public void getAllOwners(Context ctx) {
         try {
             List<Owner> owners = service.getAllOwners();
             ctx.json(owners);
@@ -31,7 +35,7 @@ public class OwnerController {
         }
     }
 
-    public static void delete(Context ctx) throws SQLException {
+    public void delete(Context ctx) throws SQLException {
         int id = Integer.parseInt(ctx.pathParam("id"));
         boolean deleted = service.delete(id);
         if (deleted) {
@@ -41,7 +45,7 @@ public class OwnerController {
         }
     }
 
-    public static void update(Context ctx) {
+    public void update(Context ctx) {
         Owner owner = gson.fromJson(ctx.body(), Owner.class);
         boolean success = service.update(owner);
         if (success) {

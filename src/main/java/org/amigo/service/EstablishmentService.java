@@ -9,8 +9,8 @@ import java.util.List;
 public class EstablishmentService {
     private final EstablishmentRepository repository;
 
-    public EstablishmentService() {
-        this.repository = new EstablishmentRepository();
+    public EstablishmentService(EstablishmentRepository repository) {
+        this.repository = repository;
     }
 
     public void save(Establishment establishment) throws SQLException {
@@ -21,10 +21,17 @@ public class EstablishmentService {
         return repository.findAll();
     }
 
-    public static boolean deleteEstablishment(int idEstablishment) {
-        return false;
+    // CORREGIDO: Usar instancia del repository en lugar de estático
+    public boolean deleteEstablishment(int idEstablishment) throws SQLException {
+        return repository.deleteEstablishment(idEstablishment);
     }
+
     public boolean update(Establishment establishment) {
-        return repository.update(establishment);
+        try {
+            return repository.update(establishment);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

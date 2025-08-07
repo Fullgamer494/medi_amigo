@@ -9,9 +9,13 @@ import java.sql.SQLException;
 
 public class VeterinaryController {
     private static final Gson gson = new Gson();
-    private static final VeterinaryService service = new VeterinaryService();
+    private final VeterinaryService service;
 
-    public static void getAllVeterinaries(Context ctx) {
+    public VeterinaryController(VeterinaryService service) {
+        this.service = service;
+    }
+
+    public void getAllVeterinaries(Context ctx) {
         try {
             ctx.json(service.getAllVeterinaries());
         } catch (SQLException e) {
@@ -19,26 +23,28 @@ public class VeterinaryController {
         }
     }
 
-    public static void createVeterinary(Context ctx) {
+    public void createVeterinary(Context ctx) {
         try {
             Veterinary vet = gson.fromJson(ctx.body(), Veterinary.class);
             service.saveVeterinary(vet);
             ctx.status(201).result("Veterinario registrado con exito");
         } catch (SQLException e) {
-            ctx.status(500).result( "error al guardar al veterinario" + e.getMessage());}
+            ctx.status(500).result("error al guardar al veterinario" + e.getMessage());
+        }
     }
 
-    public static void deleteVeterinary ( Context ctx) throws SQLException {
+    // CORREGIDO: Usar instancia del service en lugar de estático
+    public void deleteVeterinary(Context ctx) throws SQLException {
         int idVet = Integer.parseInt(ctx.pathParam("idVet"));
-        boolean deleteVeterinary = VeterinaryService.deleteVeterinary(idVet);
+        boolean deleteVeterinary = service.deleteVeterinary(idVet);
         if (deleteVeterinary) {
-            ctx.status(200).result( "Veterinario eliminado con éxito");
+            ctx.status(200).result("Veterinario eliminado con éxito");
         } else {
             ctx.status(404).result("Veterinario no encontrado");
         }
     }
 
-    public static void update(Context ctx) {
+    public void update(Context ctx) {
         Veterinary vet = gson.fromJson(ctx.body(), Veterinary.class);
         boolean success = service.update(vet);
         if (success) {

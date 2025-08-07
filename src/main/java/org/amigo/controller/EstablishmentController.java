@@ -9,9 +9,13 @@ import java.sql.SQLException;
 
 public class EstablishmentController {
     private static final Gson gson = new Gson();
-    private static final EstablishmentService service = new EstablishmentService();
+    private final EstablishmentService service;
 
-    public static void createEstablishment(Context ctx) {
+    public EstablishmentController(EstablishmentService service) {
+        this.service = service;
+    }
+
+    public void createEstablishment(Context ctx) {
         try {
             Establishment establishment = gson.fromJson(ctx.body(), Establishment.class);
             if (establishment.getName() == null || establishment.getDescription() == null || establishment.getDirectory() == null) {
@@ -27,7 +31,7 @@ public class EstablishmentController {
         }
     }
 
-    public static void getAllEstablishments(Context ctx) {
+    public void getAllEstablishments(Context ctx) {
         try {
             ctx.json(service.getAll());
         } catch (SQLException e) {
@@ -35,17 +39,17 @@ public class EstablishmentController {
         }
     }
 
-    public static void deleteEstablishment (Context ctx) throws SQLException {
+    public void deleteEstablishment(Context ctx) throws SQLException {
         int id = Integer.parseInt(ctx.pathParam("id"));
         boolean deleted = service.deleteEstablishment(id);
         if (deleted) {
             ctx.status(200).result("Establecimiento eliminado con éxito");
         } else {
-            ctx.status(404).result("Establecimineto no encontrado");
+            ctx.status(404).result("Establecimiento no encontrado");
         }
     }
 
-    public static void update(Context ctx) {
+    public void update(Context ctx) {
         Establishment establishment = gson.fromJson(ctx.body(), Establishment.class);
         boolean success = service.update(establishment);
         if (success) {

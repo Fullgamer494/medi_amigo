@@ -8,9 +8,11 @@ import java.util.List;
 
 public class UserService {
     private final UserRepository userRepo;
+
     public UserService(UserRepository userRepo) {
         this.userRepo = userRepo;
     }
+
     public List<User> getAllUsers() throws SQLException {
         return userRepo.findAll();
     }
@@ -23,12 +25,12 @@ public class UserService {
         userRepo.save(user);
     }
 
+    // CORREGIDO: Usar instancia del repository en lugar de estático
     public boolean delete(int idUser) throws SQLException {
-        return UserRepository.delete(idUser);
+        return userRepo.delete(idUser);
     }
 
     public boolean updateUser(User user) throws SQLException {
         return userRepo.update(user);
     }
-
 }

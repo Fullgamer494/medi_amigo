@@ -1,37 +1,17 @@
 package org.amigo.di;
 
-import io.javalin.Javalin;
-import org.amigo.controller.OwnerController;
-import org.amigo.controller.VeterinaryController;
-import org.amigo.controller.UserController;
-import org.amigo.controller.PetController;
-import org.amigo.controller.EstablishmentController;
-import org.amigo.controller.VaccineController;
-import org.amigo.controller.VaccineRelController;
-import org.amigo.repository.UserRepository;
-import org.amigo.repository.VeterinaryRepository;
-import org.amigo.repository.OwnerRepository;
-import org.amigo.repository.PetRepository;
-import org.amigo.repository.EstablishmentRepository;
-import org.amigo.repository.VaccineRepository;
-import org.amigo.repository.VaccineRelRepository;
-import org.amigo.routes.UserRoutes;
-import org.amigo.routes.VeterinaryRoutes;
-import org.amigo.routes.OwnerRoutes;
-import org.amigo.routes.PetRoutes;
-import org.amigo.routes.EstablishmentRoutes;
-import org.amigo.routes.VaccineRoutes;
-import org.amigo.routes.VacineRelRoutes;
-import org.amigo.service.UserService;
-import org.amigo.service.VeterinaryService;
-import org.amigo.service.OwnerService;
-import org.amigo.service.PetService;
-import org.amigo.service.EstablishmentService;
-import org.amigo.service.VaccineService;
-import org.amigo.service.VaccineRelService;
+import org.amigo.controller.*;
+import org.amigo.repository.*;
+import org.amigo.routes.*;
+import org.amigo.service.*;
 
+/**
+ * AppModule - Responsable únicamente de la inyección de dependencias
+ * Crea la cadena completa: Repository -> Service -> Controller -> Routes
+ */
 public class AppModule {
 
+    // User dependencies
     public static UserRoutes initUser() {
         UserRepository userRepo = new UserRepository();
         UserService userService = new UserService(userRepo);
@@ -39,6 +19,7 @@ public class AppModule {
         return new UserRoutes(userController);
     }
 
+    // Veterinary dependencies
     public static VeterinaryRoutes initVeterinary() {
         VeterinaryRepository veterinaryRepo = new VeterinaryRepository();
         VeterinaryService veterinaryService = new VeterinaryService(veterinaryRepo);
@@ -46,6 +27,7 @@ public class AppModule {
         return new VeterinaryRoutes(veterinaryController);
     }
 
+    // Owner dependencies
     public static OwnerRoutes initOwner() {
         OwnerRepository ownerRepo = new OwnerRepository();
         OwnerService ownerService = new OwnerService(ownerRepo);
@@ -53,6 +35,7 @@ public class AppModule {
         return new OwnerRoutes(ownerController);
     }
 
+    // Pet dependencies
     public static PetRoutes initPet() {
         PetRepository petRepo = new PetRepository();
         PetService petService = new PetService(petRepo);
@@ -60,6 +43,7 @@ public class AppModule {
         return new PetRoutes(petController);
     }
 
+    // Establishment dependencies
     public static EstablishmentRoutes initEstablishment() {
         EstablishmentRepository establishmentRepo = new EstablishmentRepository();
         EstablishmentService establishmentService = new EstablishmentService(establishmentRepo);
@@ -67,6 +51,7 @@ public class AppModule {
         return new EstablishmentRoutes(establishmentController);
     }
 
+    // Vaccine dependencies
     public static VaccineRoutes initVaccine() {
         VaccineRepository vaccineRepo = new VaccineRepository();
         VaccineService vaccineService = new VaccineService(vaccineRepo);
@@ -74,10 +59,11 @@ public class AppModule {
         return new VaccineRoutes(vaccineController);
     }
 
-    public static VaccineRelRoutes initVaccineRel() {
+    // VaccineRel dependencies - CORREGIDO: Usar nombre original VacineRelRoutes
+    public static VacineRelRoutes initVaccineRel() {
         VaccineRelRepository vaccineRelRepo = new VaccineRelRepository();
         VaccineRelService vaccineRelService = new VaccineRelService(vaccineRelRepo);
         VaccineRelController vaccineRelController = new VaccineRelController(vaccineRelService);
-        return new VaccineRelRoutes(vaccineRelController);
+        return new VacineRelRoutes(vaccineRelController);
     }
 }

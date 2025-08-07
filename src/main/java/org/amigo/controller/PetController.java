@@ -10,9 +10,13 @@ import java.util.List;
 
 public class PetController {
     private static final Gson gson = new Gson();
-    private static final PetService service = new PetService();
+    private final PetService service;
 
-    public static void createPet(Context ctx) {
+    public PetController(PetService service) {
+        this.service = service;
+    }
+
+    public void createPet(Context ctx) {
         try {
             Pet pet = gson.fromJson(ctx.body(), Pet.class);
             service.savePet(pet);
@@ -24,7 +28,7 @@ public class PetController {
         }
     }
 
-    public static void getAllPets(Context ctx) {
+    public void getAllPets(Context ctx) {
         try {
             List<Pet> pets = service.getAllPets();
             ctx.json(pets);
@@ -33,7 +37,7 @@ public class PetController {
         }
     }
 
-    public static void getPetsByUserId(Context ctx) {
+    public void getPetsByUserId(Context ctx) {
         int idUser = Integer.parseInt(ctx.pathParam("idUser"));
         try {
             List<Pet> pets = service.getPetByUserId(idUser);
@@ -43,7 +47,7 @@ public class PetController {
         }
     }
 
-    public static void deletePet(Context ctx) throws SQLException {
+    public void deletePet(Context ctx) throws SQLException {
         int id = Integer.parseInt(ctx.pathParam("id"));
         boolean deleted = service.deletePet(id);
         if (deleted) {
@@ -53,9 +57,10 @@ public class PetController {
         }
     }
 
-    public static void update(Context ctx) {
+    // CORREGIDO: Usar instancia del service en lugar de estático
+    public void update(Context ctx) {
         Pet pet = gson.fromJson(ctx.body(), Pet.class);
-        boolean success = PetService.update(pet);
+        boolean success = service.update(pet);
         if (success) {
             ctx.status(200).result("Pet updated");
         } else {

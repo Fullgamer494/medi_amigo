@@ -11,11 +11,9 @@ public class OwnerRoutes {
     }
 
     public void register(Javalin app) {
-        app.get("/owners/all", OwnerController::getAllOwners);
-        app.post("/owners", OwnerController::createOwner);
-        app.delete("/owner/{id}", OwnerController::delete);
-        app.put("/owner", OwnerController::update);
-
-
+        app.get("/owners/all", ownerController::getAllOwners);
+        app.post("/owners", ownerController::createOwner);
+        app.delete("/owner/{id}", ownerController::delete);
+        app.put("/owner", ownerController::update);
     }
 }

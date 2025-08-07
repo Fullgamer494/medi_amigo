@@ -10,12 +10,20 @@ import java.util.List;
 public class EstablishmentRepository {
 
     public void save(Establishment establishment) throws SQLException {
-        String sql = "INSERT INTO Establishment (nombre, descripcion, direccion) VALUES (?, ?, ?)";
+        // Incluir idVet en el INSERT
+        String sql = "INSERT INTO establishment (IdVet, nombre, descripcion, direccion) VALUES (?, ?, ?, ?)";
         try (Connection conn = Database.getDataSource().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, establishment.getName());
-            stmt.setString(2, establishment.getDescription());
-            stmt.setString(3, establishment.getDirectory());
+
+            if (establishment.getIdVet() != null) {
+                stmt.setInt(1, establishment.getIdVet());
+            } else {
+                stmt.setNull(1, Types.INTEGER);
+            }
+
+            stmt.setString(2, establishment.getName());
+            stmt.setString(3, establishment.getDescription());
+            stmt.setString(4, establishment.getDirectory());
             stmt.executeUpdate();
         }
     }
@@ -40,32 +48,27 @@ public class EstablishmentRepository {
         }
         return establishments;
     }
-    public static boolean deleteEstablishment(int idLocal) throws SQLException {
-        Establishment establishment = null;
+
+    // CORREGIDO: Cambiar de estático a instancia
+    public boolean deleteEstablishment(int idLocal) throws SQLException {
         String sql = "DELETE FROM establishment WHERE IdLocal = ?";
         try (Connection conn = Database.getDataSource().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, idLocal);
-            stmt.executeUpdate();
+            return stmt.executeUpdate() > 0;
         }
-        return false;
     }
 
-    public boolean update(Establishment establishment) {
-        String sql = "UPDATE establishment SET nombre = ?, descripcion = ?, direccion = ?,  ? WHERE IdLocal = ?";
+    // CORREGIDO: SQL malformado - quitar ? extra
+    public boolean update(Establishment establishment) throws SQLException {
+        String sql = "UPDATE establishment SET nombre = ?, descripcion = ?, direccion = ? WHERE IdLocal = ?";
         try (Connection conn = Database.getDataSource().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, establishment.getName ());
-            stmt.setString(2, establishment.getDescription ());
+            stmt.setString(1, establishment.getName());
+            stmt.setString(2, establishment.getDescription());
             stmt.setString(3, establishment.getDirectory());
             stmt.setInt(4, establishment.getIdLocal());
-
             return stmt.executeUpdate() > 0;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
         }
     }
 }

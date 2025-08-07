@@ -8,9 +8,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class VaccineController {
-    private static final VaccineService service = new VaccineService();
+    private final VaccineService service;
 
-    public static void getAllVaccines(Context ctx) {
+    public VaccineController(VaccineService service) {
+        this.service = service;
+    }
+
+    public void getAllVaccines(Context ctx) {
         try {
             List<Vaccine> vaxx = service.getAllVaccines();
             ctx.json(vaxx);
@@ -18,5 +22,4 @@ public class VaccineController {
             ctx.status(500).result("Error recuperando vacunas: " + e.getMessage());
         }
     }
-
 }

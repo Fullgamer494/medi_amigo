@@ -73,6 +73,7 @@ public class PetRepository {
         }
         return pets;
     }
+
     public boolean deletePet(int idPet) throws SQLException {
         String sql = "DELETE FROM pet WHERE idPet = ?";
         try (Connection conn = Database.getDataSource().getConnection();
@@ -83,7 +84,8 @@ public class PetRepository {
         }
     }
 
-    public static boolean update(Pet pet) throws SQLException {
+    // CORREGIDO: Cambiar de estático a instancia
+    public boolean update(Pet pet) throws SQLException {
         String sql = "UPDATE pet SET idUser = ?, idVet = ?, nombre = ?, age = ?, species = ?, sex = ?, weight = ?, photo = ?, " +
                 "numVisit = ?, vaccines = ?, nextVaccine = ?, nextVaccineDate = ?, surgeries = ?, condicion = ?, lastVisit = ?, " +
                 "state = ?, treatment = ?, lastVaccines = ?, race = ? WHERE IdPet = ?";
@@ -115,19 +117,15 @@ public class PetRepository {
 
     public List<Pet> findMascotasByIdUser(int idUser) throws SQLException {
         List<Pet> mascotas = new ArrayList<>();
-
         String query = "SELECT * FROM pet WHERE idUser = ?";
 
-        try (
-                Connection conn = Database.getDataSource().getConnection();
-                PreparedStatement stmt = conn.prepareStatement(query)
-        ) {
+        try (Connection conn = Database.getDataSource().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, idUser);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     Pet mascota = new Pet();
-
                     mascota.setIdPet(rs.getInt("IdPet"));
                     mascota.setIdUser(rs.getInt("idUser"));
                     mascota.setIdVet(rs.getInt("idVet"));
@@ -148,13 +146,10 @@ public class PetRepository {
                     mascota.setTreatment(rs.getString("treatment"));
                     mascota.setLastVaccines(rs.getString("lastVaccines"));
                     mascota.setRace(rs.getString("race"));
-
                     mascotas.add(mascota);
                 }
             }
         }
-
         return mascotas;
     }
-
 }

@@ -9,8 +9,8 @@ import java.util.List;
 public class OwnerService {
     private final OwnerRepository repository;
 
-    public OwnerService() {
-        this.repository = new OwnerRepository();
+    public OwnerService(OwnerRepository repository) {
+        this.repository = repository;
     }
 
     public void saveOwner(Owner owner) throws SQLException {
@@ -25,7 +25,7 @@ public class OwnerService {
         return repository.delete(idOwner);
     }
 
-    public  boolean update(Owner owner) {
+    public boolean update(Owner owner) {
         try {
             return repository.update(owner);
         } catch (SQLException e) {
@@ -34,4 +34,3 @@ public class OwnerService {
         }
     }
 }
-

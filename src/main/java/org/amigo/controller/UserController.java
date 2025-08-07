@@ -48,6 +48,7 @@ public class UserController {
             ctx.status(400).result("Error al crear usuario" + e.getMessage());
         }
     }
+
     public void delete(Context ctx) throws SQLException {
         int id = Integer.parseInt(ctx.pathParam("id"));
         boolean deleted = userService.delete(id);
@@ -62,7 +63,7 @@ public class UserController {
         try {
             int id = Integer.parseInt(ctx.pathParam("id"));
             User user = ctx.bodyAsClass(User.class);
-            user.setIdUser(id); // Asegurar que el ID del path se use
+            user.setIdUser(id);
             boolean updated = userService.updateUser(user);
             if (updated) {
                 ctx.status(200).result("Usuario actualizado correctamente");
@@ -73,6 +74,4 @@ public class UserController {
             ctx.status(400).result("Error al actualizar usuario: " + e.getMessage());
         }
     }
-
-
 }

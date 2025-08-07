@@ -9,7 +9,9 @@ import java.util.List;
 public class VaccineService {
     private final VaccineRepository repository;
 
-    public VaccineService(){this.repository = new VaccineRepository();}
+    public VaccineService(VaccineRepository repository) {
+        this.repository = repository;
+    }
 
     public List<Vaccine> getAllVaccines() throws SQLException {
         return repository.findAll();

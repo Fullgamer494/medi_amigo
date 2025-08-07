@@ -14,15 +14,13 @@ public class UserRepository {
     public List<User> findAll() throws SQLException {
         List<User> users = new ArrayList<>();
         String query = "SELECT * FROM usuario";
-        try (
-                Connection conn = Database.getDataSource().getConnection();
-                PreparedStatement stmt = conn.prepareStatement(query);
-                ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = Database.getDataSource().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 User u = new User();
-                // Asegúrate de que estos nombres de columna coincidan EXACTAMENTE con tu script SQL
                 u.setIdUser(rs.getInt("IdUser"));
-                u.setName(rs.getString("nombre")); //
+                u.setName(rs.getString("nombre"));
                 u.setEmail(rs.getString("email"));
                 u.setPhoneNumber(rs.getString("phoneNumber"));
                 u.setPassword(rs.getString("contra"));
@@ -46,19 +44,18 @@ public class UserRepository {
                 if (rs.next()) {
                     user = new User();
                     user.setIdUser(rs.getInt("IdUser"));
-                    user.setName(rs.getString("name"));
+                    user.setName(rs.getString("nombre"));
                     user.setEmail(rs.getString("email"));
                     user.setPhoneNumber(rs.getString("phoneNumber"));
-                    user.setPassword(rs.getString("password"));
+                    user.setPassword(rs.getString("contra"));
+                    user.setFoto(rs.getString("foto"));
                 }
             }
         }
-
         return user;
     }
 
     public void save(User user) throws SQLException {
-
         String query = "INSERT INTO usuario (nombre, email, contra, phoneNumber, foto) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = Database.getDataSource().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -67,13 +64,13 @@ public class UserRepository {
             stmt.setString(3, user.getPassword());
             stmt.setString(4, user.getPhoneNumber());
             stmt.setString(5, user.getFoto());
-
-
             stmt.executeUpdate();
         }
     }
-    public static boolean delete (int idUser) throws SQLException {
-        String sql = "DELETE FROM usuario WHERE idUser = ?";
+
+    // CORREGIDO: Cambiar de estático a instancia
+    public boolean delete(int idUser) throws SQLException {
+        String sql = "DELETE FROM usuario WHERE IdUser = ?";
         try (Connection conn = Database.getDataSource().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, idUser);
@@ -83,20 +80,17 @@ public class UserRepository {
     }
 
     public boolean update(User user) throws SQLException {
-        String query = "UPDATE usuario SET name = ?, email = ?, password = ?, phoneNumber = ? WHERE IdUser = ?";
+        String query = "UPDATE usuario SET nombre = ?, email = ?, contra = ?, phoneNumber = ?, foto = ? WHERE IdUser = ?";
         try (Connection conn = Database.getDataSource().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getPassword());
             stmt.setString(4, user.getPhoneNumber());
-            stmt.setInt(5, user.getIdUser());
-
+            stmt.setString(5, user.getFoto());
+            stmt.setInt(6, user.getIdUser());
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;
         }
     }
-
-
-
 }

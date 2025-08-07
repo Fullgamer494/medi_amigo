@@ -3,7 +3,6 @@ package org.amigo;
 import io.javalin.Javalin;
 import io.javalin.plugin.bundled.CorsPluginConfig;
 import org.amigo.di.AppModule;
-import org.amigo.routes.VeterinaryRoutes;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,14 +13,16 @@ public class Main {
             });
         }).start(7000);
 
-        // Rutas generales
+        // Ruta general
         app.get("/", ctx -> ctx.result("MediAmigo"));
+
+        // Registrar rutas usando inyección de dependencias
         AppModule.initUser().register(app);
-        AppModule.initVeterinary(app);
-        AppModule.initPet(app);
-        AppModule.initEstablishment(app);
-        AppModule.initVaccine(app);
-        AppModule.initVaccineRel(app);
-        VeterinaryRoutes.register(app);
+        AppModule.initVeterinary().register(app);
+        AppModule.initOwner().register(app);
+        AppModule.initPet().register(app);
+        AppModule.initEstablishment().register(app);
+        AppModule.initVaccine().register(app);
+        AppModule.initVaccineRel().register(app);
     }
 }
