@@ -88,7 +88,15 @@
         <input type="text" name="" id="nombre" disabled>
 
         <p class="etiqueta">Ubicación</p>
-        <input type="text" name="" id="lugar" disabled>
+        <div class="ubicaciones-container">
+            <div class="ubicaciones-header" id="ubicacionesHeader">
+                <span id="ubicacionesTexto">Ver ubicaciones</span>
+                <span class="ubicaciones-arrow" id="ubicacionesArrow">▼</span>
+            </div>
+            <div class="ubicaciones-content" id="ubicacionesContent">
+                <!-- Las ubicaciones se cargarán dinámicamente aquí -->
+            </div>
+        </div>
         
         <p class="etiqueta">Especialidad</p>
         <input type="text" name="" id="espec" disabled>

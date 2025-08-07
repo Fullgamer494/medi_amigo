@@ -96,6 +96,7 @@
     overflow-y: scroll;
     scroll-behavior: smooth;
     z-index: 10;
+    place-items: center;
 }
 
 .carta{
@@ -408,4 +409,68 @@ button{
 }
 .boton-no:hover{
     background-color: red;
+}
+.ubicaciones-container {
+    position: relative;
+    margin: 10px 0;
+    width: 50%;
+}
+
+.ubicaciones-header {
+    padding: 12px 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.ubicaciones-header:hover {
+    background: #f5f5f5;
+}
+
+.ubicaciones-header.disabled {
+    cursor: default;
+    background: #f9f9f9;
+    color: #666;
+}
+
+.ubicaciones-arrow {
+    transition: transform 0.3s ease;
+    font-size: 12px;
+}
+
+.ubicaciones-arrow.rotated {
+    transform: rotate(180deg);
+}
+
+.ubicaciones-content {
+    max-height: 0;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    background: white;
+    transition: max-height 0.3s ease;
+}
+
+.ubicaciones-content.expanded {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.ubicacion-item {
+    padding: 8px 16px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.ubicacion-item:last-child {
+    border-bottom: none;
+}
+
+.ubicacion-item:hover {
+    background: #f0f8ff;
 }

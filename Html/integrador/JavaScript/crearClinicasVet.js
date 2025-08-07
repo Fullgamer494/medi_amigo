@@ -6,58 +6,132 @@ let vet = []
 let clinica = []
 let clinicaHecho = []
 let veterinario = []
+
 let selec
+
+// Elementos para el dropdown de ubicaciones
+const ubicacionesHeader = document.getElementById("ubicacionesHeader");
+const ubicacionesContent = document.getElementById("ubicacionesContent");
+const ubicacionesArrow = document.getElementById("ubicacionesArrow");
+const ubicacionesTexto = document.getElementById("ubicacionesTexto");
+
+let isUbicacionesExpanded = false;
+
+// Función para inicializar el desplegable de ubicaciones
+function initializeUbicacionesDropdown() {
+    if (!ubicacionesHeader) return; // Verificar que el elemento existe
+    
+    ubicacionesHeader.addEventListener('click', function() {
+        if (ubicacionesHeader.classList.contains('disabled')) return;
+        
+        isUbicacionesExpanded = !isUbicacionesExpanded;
+        
+        if (isUbicacionesExpanded) {
+            ubicacionesContent.classList.add('expanded');
+            ubicacionesArrow.classList.add('rotated');
+        } else {
+            ubicacionesContent.classList.remove('expanded');
+            ubicacionesArrow.classList.remove('rotated');
+        }
+    });
+}
+
+// Función para poblar las ubicaciones en el desplegable
+function poblarUbicacionesDropdown(ubicaciones) {
+    if (!ubicacionesContent || !ubicacionesTexto) return;
+    
+    ubicacionesContent.innerHTML = '';
+    
+    if (!ubicaciones || ubicaciones.length === 0) {
+        const item = document.createElement('div');
+        item.classList.add('ubicacion-item');
+        item.textContent = 'No hay ubicaciones disponibles';
+        item.style.color = '#999';
+        item.style.fontStyle = 'italic';
+        ubicacionesContent.appendChild(item);
+        ubicacionesTexto.textContent = 'Sin ubicaciones';
+        return;
+    }
+    
+    ubicaciones.forEach(ubicacion => {
+        const item = document.createElement('div');
+        item.classList.add('ubicacion-item');
+        item.textContent = ubicacion;
+        ubicacionesContent.appendChild(item);
+    });
+    
+    ubicacionesTexto.textContent = `Ver ubicaciones (${ubicaciones.length})`;
+}
+
 async function traerDatos() {
     try {
         const res = await fetch("http://localhost:7000/users")
-        .then(res => res.json())
-        .then(data => {
-            usuario = data
-        })
+            .then(res => res.json())
+            .then(data => {
+                usuario = data
+            });
 
         const vets = await fetch("http://localhost:7000/veterinary")
-        .then(res => res.json())
-        .then(data => {
-            vet = data
-        })
+            .then(res => res.json())
+            .then(data => {
+                vet = data
+            });
 
         const clinicas = await fetch("http://localhost:7000/establishment/all")
-        .then(res => res.json())
-        .then(data => {
-            clinica = data
-        })
+            .then(res => res.json())
+            .then(data => {
+                clinica = data
+            });
 
-        for (let i=0 ; i<clinica.length ; i++){
-            for (let j=0 ; j<vet.length ; j++){
-                if ((clinica[i].idVet == vet[j].idVet) && (vet[j].idUser == u.idUser)){
+        for (let i = 0; i < clinica.length; i++) {
+            for (let j = 0; j < vet.length; j++) {
+                if ((clinica[i].idVet == vet[j].idVet) && (vet[j].idUser == u.idUser)) {
+
+                    // Obtener ubicaciones específicas para esta clínica
+                    let ubicaciones = [];
+                    let direccionTexto = "No disponible";
+                    
+                    try {
+                        const resUbi = await fetch(`http://localhost:7000/location/establishment/${clinica[i].idLocal}`);
+                        if (resUbi.ok) {
+                            const ubicacionesData = await resUbi.json();
+                            ubicaciones = ubicacionesData.map(u => u.nombre_ubicacion);
+                            direccionTexto = ubicaciones.join(", ");
+                        }
+                    } catch (e) {
+                        console.error(`Error trayendo ubicación de local ${clinica[i].idLocal}:`, e);
+                    }
+
                     let clinicaCompleta = {
-                        "idUser":u.idUser,
-                        "idVet":vet[j].idVet,
+                        "idUser": u.idUser,
+                        "idVet": vet[j].idVet,
                         "idLocal": clinica[i].idLocal,
                         "foto": u.foto,
-                        "name":clinica[i].name,
-                        "especialidad":vet[j].especialidad,
-                        "calificacion":clinica[i].calificacion,
-                        "direccion":clinica[i].directory,
-                        "email":u.email,
-                        "phoneNumber":u.phoneNumber,
-                        "disponibilidad":vet[i].disponibilidad,
-                        "descripcion":clinica[i].description
+                        "name": clinica[i].name,
+                        "especialidad": vet[j].especialidad,
+                        "calificacion": clinica[i].calificacion,
+                        "email": u.email,
+                        "phoneNumber": u.phoneNumber,
+                        "disponibilidad": vet[j].disponibilidad,
+                        "descripcion": clinica[i].description,
+                        "direccion": direccionTexto,
+                        "ubicaciones": ubicaciones // Agregar array de ubicaciones
                     }
-                    clinicaHecho.push(clinicaCompleta)
+
+                    clinicaHecho.push(clinicaCompleta);
                 }
-                
             }
         }
-        for (let i=0 ; i<clinicaHecho.length ; i++){
-            crearCartas(clinicaHecho[i])
+
+        for (let i = 0; i < clinicaHecho.length; i++) {
+            crearCartas(clinicaHecho[i]);
         }
 
-        if (!Response.ok){
-            throw new Error(Response.status)
-        }
+        // Inicializar el dropdown después de cargar los datos
+        initializeUbicacionesDropdown();
+
     } catch (e) {
-        console.log("Error:" + e)
+        console.log("Error:" + e);
     }
 }
 
@@ -94,8 +168,6 @@ tapar.addEventListener('click', function(){
     cerrar_campos()
 })
 
-
-
 const eliminacion = document.getElementById("eliminarcuenta")
 const botonConfirmacion = document.getElementById("eliminar")
 const botonRegresar = document.getElementById("noeliminar")
@@ -107,7 +179,7 @@ const error = document.getElementById("c-err")
 
 const img = document.getElementById("img")
 const nombre = document.getElementById("nombre")
-const lugar = document.getElementById("lugar")
+// const lugar = document.getElementById("lugar") // Ya no se usa
 const espec = document.getElementById("espec")
 const calif = document.getElementById("calif")
 const horario = document.getElementById("horario")
@@ -128,7 +200,6 @@ function crearCartas(obj){
     const carta = document.createElement("div")
     carta.classList.add("establecimiento-carta")
     contenedor.insertBefore(carta,botonCrear)
-
 
     const cartaS1 = document.createElement("div")
     cartaS1.classList.add("establecimiento-seccion-1")
@@ -179,11 +250,16 @@ function crearCartas(obj){
 
 function abrir_campos(){
     nombre.disabled = false
-    lugar.disabled = false
+    // lugar.disabled = false // Ya no se usa
     espec.disabled = false
     horario.disabled = false
     num.disabled = false
     correo.disabled = false
+    
+    // Habilitar el dropdown
+    if (ubicacionesHeader) {
+        ubicacionesHeader.classList.remove('disabled');
+    }
 }
 
 function mostrar_botones(){
@@ -200,16 +276,24 @@ function esconder_botones(){
 
 function cerrar_campos(){
     nombre.disabled = true
-    lugar.disabled = true
+    // lugar.disabled = true // Ya no se usa
     espec.disabled = true
     calif.disabled = true
     horario.disabled = true
     num.disabled = true
     correo.disabled = true
+    
+    // Deshabilitar el dropdown y cerrarlo
+    if (ubicacionesHeader && ubicacionesContent && ubicacionesArrow) {
+        ubicacionesHeader.classList.add('disabled');
+        ubicacionesContent.classList.remove('expanded');
+        ubicacionesArrow.classList.remove('rotated');
+        isUbicacionesExpanded = false;
+    }
 }
 
 function verificar(){
-    if (nombre.value && lugar.value && espec.value && calif.value && horario.value
+    if (nombre.value && espec.value && calif.value && horario.value
         && num.value && correo.value){
         return true
     }else{
@@ -222,13 +306,16 @@ function mostrarClinica(obj){
     contenedor.style.visibility = "hidden"
 
     nombre.value = obj.name
-    lugar.value = obj.direccion
+    // lugar.value = obj.direccion // Ya no se usa
     espec.value = obj.especialidad
     calif.value = obj.calificacion
     horario.value = obj.disponibilidad
     num.value = obj.phoneNumber
     correo.value = obj.email
     desc.value = obj.descripcion
+
+    // Poblar el dropdown de ubicaciones
+    poblarUbicacionesDropdown(obj.ubicaciones || []);
 
     contenedor_info.style.visibility = "visible"
 }
@@ -262,7 +349,7 @@ entrada.addEventListener('keypress', async function(evento){
                 let data = {
                     "name":nombre.value,
                     "description":desc.value,
-                    "directory":lugar.value,
+                    "directory":"", // Puedes ajustar esto según tus necesidades
                     "idLocal":selec
                 }
 
@@ -328,7 +415,7 @@ function reiniciar_campos(obj){
     for (let i=0 ; i<obj.length ; i++){
         if (id.value == obj[i].Id){
             nombre.value = obj[i].Establecimiento
-            lugar.value = obj[i].Ubicación
+            // lugar.value = obj[i].Ubicación // Ya no se usa
             espec.value = obj[i].Especialidad
             calif.value = obj[i].Calificación
             horario.value = obj[i].Horario
@@ -372,7 +459,7 @@ async function actualizarClinica(data) {
       throw new Error(`Error ${res.status}: No se pudo editar la clínica`);
     }
 
-    console.log(`Clinica con ID ${id} editada exitosamente.`);
+    console.log(`Clinica con ID ${data.idLocal} editada exitosamente.`);
   } catch (e) {
     console.error("Ocurrió un error al editar la clínica:", e);
   }
