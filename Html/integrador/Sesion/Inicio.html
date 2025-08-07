@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./Iniciada/estilos/hogar.css">
+    <link rel="stylesheet" href="../estilos/compartidos.css">
+    <script type="module" src="../JavaScript/app.js"></script>
+    <script type="module" src="../JavaScript/usuarioSeleccionado.js"></script>
+    <script type="module" src="/Html/integrador/JavaScript/gets.js"></script>
+    <title>Iniciar sesión</title>
+</head>
+<body><div id="carga"></div>
+
+    <header class="encabezado">
+        <div class="raya">
+            <img src="../imagenes/logo-TEMPORAL.png" alt="Logo" class="logo">
+            <p>Medi-Amigo</p>
+        </div>
+        <div class="curva"></div>
+    </header>
+
+    <div class="formulario" >
+        <form id="form" action="./Iniciada/VistasUsuario/Hogar/Mascotas.html"><h1>Iniciar sesión</h1>
+            <p>Puede iniciar sesión con cualquiera de las siguientes opciones:</p>
+
+            <input type="text" name="" id="nombre" placeholder="Usar nombre de usuario">
+            <br>
+            <input type="email" name="" id="correo" placeholder="Usar correo electrónico">
+            <p>ó</p>
+            <input type="tel" name="" id="tel" placeholder="Usar número telefónico">
+            <div class="separador"></div>
+            <input type="password" name="" id="contra" placeholder="Contraseña">
+            <p id="c-err" class="c-err">Contraseña equivocada. Intente de nuevo.</p>
+
+            <button type="submit" >Iniciar sesión</button>
+        </form>
+        <br>
+    </div>
+
+    <div class="pieR">
+        <div class="curva-2"></div>
+        <br><br><br>
+    </div>
+
+</body>
+</html>

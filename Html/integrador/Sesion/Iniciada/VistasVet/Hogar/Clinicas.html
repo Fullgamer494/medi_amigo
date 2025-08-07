@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Html/integrador/estilos/compartidos.css">
+    <link rel="stylesheet" href="/Html/integrador/Sesion/Iniciada/estilos/hogar.css">
+    <script src="/Html/integrador/JavaScript/app.js" type="module"></script>
+    <script type="module" src="/Html/integrador/JavaScript/crearClinicasVet.js"></script>
+    <title>Hogar</title>
+</head>
+<body><div id="carga"></div>
+
+    <div id="cubrir-pantalla" class="pantalla-carga"></div>
+
+    <div class="contra-cuadro" id="confirmarcontra">
+        <p>Confirme su contraseña para guardar los cambios:</p>
+        <input type="password" name="" id="contra" class="contraseña">
+        <p id="c-err" class="c-err">Contraseña equivocada. Intente de nuevo.</p>
+    </div>
+
+    <div class="contra-cuadro" id="eliminarcuenta">
+        <p>¿Realmente desea eliminar el registro de su clínica?</p>
+        <p>Toda la información asociada a esta será eliminada.</p>
+        <br>
+        <div style="display: flex;">
+            <button type="button" id="eliminar" class="boton-si">Sí, eliminar.</button>
+            <button type="button" id="noeliminar" class="boton-no">No, regresar.</button>
+        </div>
+    </div>
+    <div class="contra-cuadro" id="confirmarcontraelim">
+        <p>Confirme su contraseña para eliminar su clínica:</p>
+        <input type="password" name="" id="contraelim" class="contraseña">
+        <p id="c-err-elim" class="c-err">Contraseña equivocada. Intente de nuevo.</p>
+    </div>
+    
+    <header class="encabezado" id="head">
+        <div class="raya">
+            <img src="/Html/integrador/imagenes/logo-TEMPORAL.png" alt="Logo" class="logo">
+            <p>Medi-Amigo</p>
+        </div>
+        <div class="curva"></div>
+    </header>
+
+    <div class="perfil">
+
+        <a href="./Perfil.html">
+            <div class="cuadro-perfil">
+                <img src="" alt="" class="pfp" id="fotoPerfil">
+                <p id="name"></p>
+            </div>
+        </a>
+        
+        <a href="./Mascotas.html">
+            <div class="opcion">
+                <img src="/Html/integrador/imagenes/dog-paw.png" alt="" class="icono">
+                Mascotas bajo su cuidado
+            </div>
+        </a>
+
+        <a href="./Clinicas.html">
+            <div class="opcion-s">
+                <img src="/Html/integrador/imagenes/clinic.png" alt="" class="icono">
+                Sus clínicas
+            </div>
+        </a>
+
+        <a href="./Veterinarios.html">
+            <div class="opcion">
+                <img src="/Html/integrador/imagenes/vet.png" alt="" class="icono">
+                Veterinarios
+            </div>
+        </a>
+
+        <a href="/Html/integrador/index.html">
+            <div class="opcion">
+                <img src="/Html/integrador/imagenes/log-out.png" alt="" class="icono">
+                Cerrar sesión
+            </div>
+        </a>
+
+    </div>
+
+    <div class="mascotas-contenedor" id="contenedor-info" style="visibility: visible;">
+        <img src="/Html/integrador/imagenes/empty-pfp.webp" alt="" class="vet-foto" id="img">
+
+        <p class="etiqueta">Nombre del establecimiento:</p>
+        <input type="text" name="" id="nombre" disabled>
+
+        <p class="etiqueta">Ubicación</p>
+        <input type="text" name="" id="lugar" disabled>
+        
+        <p class="etiqueta">Especialidad</p>
+        <input type="text" name="" id="espec" disabled>
+    
+        <p class="etiqueta">Calificación promedio:</p>
+        <input type="text" name="" id="calif" disabled>
+            
+        <p class="etiqueta">Horas de atención:</p>
+        <input type="text" name="" id="horario" disabled>
+        
+        <p class="etiqueta">Número telefónico:</p>
+        <input type="text" name="" id="num" disabled>
+        
+        <p class="etiqueta">Correo electrónico:</p>
+        <input type="text" name="" id="correo" disabled>
+
+        <p class="etiqueta">Descripción:</p>
+        <textarea name="" id="desc"></textarea>
+
+        <input type="hidden" name="" id="id">
+        
+        <div class="panel-cambio-fijo">
+            <button id="b-r" class="boton-vet">
+                <img src="/Html/integrador/imagenes/log-out.png" alt="" class="icono-boton">
+                <span>Regresar</span>
+            </button>
+
+            <button id="b-e" class="boton-vet">
+                <img src="/Html/integrador/imagenes/pencil.png" alt="" class="icono-boton">
+                Editar datos
+            </button>
+
+            <button id="b-g" class="boton-vet" style="visibility: hidden;">
+                <img src="/Html/integrador/imagenes/save.png" alt="" class="icono-boton">
+                Guardar cambios
+            </button>
+
+            <button id="b-c" class="boton-vet" style="visibility: hidden;">
+                <img src="/Html/integrador/imagenes/cancel.png" alt="" class="icono-boton">
+                Cancelar
+            </button>
+
+            <button id="b-eli" class="boton-vet" style="visibility: hidden;">
+                <img src="/Html/integrador/imagenes/trash-can.png" alt="" class="icono-boton">
+                Eliminar mascota
+            </button>
+        </div>
+    </div>
+
+    <div class="vet-contenedor" id="contenedor">
+        
+        <a href="../Establecimiento/CrearEstablecimiento.html" class="mascotas-add" id="añadir">
+            <img src="/Html/integrador/imagenes/plus.webp" alt="" style="width: 10%;">
+            <p>Registrar una clínica.</p>
+        </a>
+    </div>
+
+    <div class="pie">
+        <div class="curva-2"></div>
+        <br><br><br>
+    </div>
+</body>
+</html>

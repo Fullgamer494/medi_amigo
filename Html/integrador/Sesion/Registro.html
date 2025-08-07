@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../estilos/compartidos.css">
+    <script src="/Html/integrador/JavaScript/app.js" type="module"></script>
+    <script type="module" src="/Html/integrador/JavaScript/Registro.js"></script>
+    <title>Regístrate</title>
+</head>
+<body><div id="carga"></div>
+    
+    <header class="encabezado" style="position: sticky; top: 0;">
+        <div class="raya">
+            <img src="../imagenes/logo-TEMPORAL.png" alt="Logo" class="logo">
+            <p>Medi-Amigo</p>
+        </div>
+        <div class="curva"></div>
+    </header>
+
+    <div class="formulario">
+        <form action="./Iniciada/VistasUsuario/Hogar/Mascotas.html" style="margin-bottom: 2vw;" class="form-group" id="form"><h1>Crear cuenta</h1>
+
+            <input type="text" name="" id="nombre" placeholder="Nombre de usuario" required>
+            
+            <input type="email" name="" id="correo" placeholder="Correo electrónico" required>
+            
+            <input type="tel" name="" id="tel" placeholder="Número telefónico" required>
+            
+            <input type="password" name="" id="contra" placeholder="Contraseña"
+            required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            title="La contraseña debe de contener al menos un número, una letra mayúscula y una letra minúscula y debe de tener 8 o más caracteres">
+
+            <input type="password" name="" id="conf-contra" placeholder="Confirmar contraseña" required>
+
+            <button type="submit" id="btn_submit">Registrarse</button>
+
+            <p>
+                ¿Eres veterinario?
+                <a href="./RegistroVet.html">Regístrate aquí.</a>
+            </p>
+        </form>
+        
+    </div>
+
+    <div class="pieR">
+        <div class="curva-2"></div>
+        <br><br><br>
+    </div>
+
+</body>
+</html>

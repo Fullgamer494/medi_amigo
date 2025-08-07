@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Html/integrador/Sesion/Iniciada/estilos/hogar.css">
+    <link rel="stylesheet" href="/Html/integrador/estilos/compartidos.css">
+    <script src="/Html/integrador/JavaScript/app.js" type="module"></script>
+    <script type="module" src="/Html/integrador/JavaScript/registroClinica.js"></script>
+    <title>Añade tu establecimiento</title>
+</head>
+<body><div id="carga"></div>
+
+    <header class="encabezado">
+        <div class="raya">
+            <img src="/Html/integrador/imagenes/logo-TEMPORAL.png" alt="Logo" class="logo">
+            <p>Medi-Amigo</p>
+        </div>
+        <div class="curva"></div>
+    </header>
+
+    <div class="formulario">
+        <form action="../Hogar/Clinicas.html" id="formulario"><h1>Añade los datos de tu establecimiento</h1>
+            <input type="text" name="" id="nombre" placeholder="Nombre del establecimiento" required>
+            
+            <input type="text" name="" id="ubi" placeholder="Ubicación" required>
+            
+            <div class="entrada">
+                <p for="">Foto del lugar:</p>
+                <input type="file" name="" id="foto" required>
+            </div>
+            <div id="foto-preview" class="entrada" style="height: auto; grid-template-columns: 1fr;">
+            </div>
+
+            <div class="entrada">
+                <p for="">RFC o Censado:</p>
+                <input type="file" name="" id="rfc" required>
+            </div>
+            <div id="rfc-preview" class="entrada" style="height: auto; grid-template-columns: 1fr;">
+            </div>
+            
+            <textarea name="" id="info" placeholder="Información sobre el establecimiento" required></textarea>
+
+            <input type="password" name="" id="contra" placeholder="Confirmar contraseña" required>
+            <p class="c-err" id="err">Contraseña equivocada. Intente de nuevo.</p>
+            <button type="submit">Añadir establecimiento</button>
+        </form>
+    </div>
+
+    <div class="pieR">
+        <div class="curva-2"></div>
+        <br><br><br>
+    </div>
+   
+</body>
+</html>

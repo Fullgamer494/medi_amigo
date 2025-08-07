@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Html/integrador/estilos/compartidos.css">
+    <script type="module" src="/Html/integrador/JavaScript/registroMascota.js"></script>
+    <title>Registrar mascota</title>
+</head>
+<body><div id="carga"></div>
+
+    <header class="encabezado">
+        <div class="raya">
+            <img src="/Html/integrador/imagenes/logo-TEMPORAL.png" alt="Logo" class="logo">
+            <p>Medi-Amigo</p>
+        </div>
+        <div class="curva"></div>
+    </header>
+
+    <div class="formulario">
+        <form action="../Hogar/Mascotas.html" id="form"><h1>Registrar mascota por un dueño</h1>
+            <h2>Información del dueño</h2>
+            
+            <input type="text" name="" id="1" placeholder="Nombre:" required>
+            
+            <input type="tel" name="" id="2" placeholder="Número telefónico:" required>
+            
+            <input type="email" name="" id="3" placeholder="Correo electrónico:" required>
+
+            <h2>Información de la mascota</h2>
+
+            <input type="text" name="" id="nombre" placeholder="Nombre:" required>
+            
+            <div class="entrada">
+                <p>Especie:</p>
+                <select name="" id="especie" required>
+                    <option value="Perro">Perro</option>
+                    <option value="Gato">Gato</option>
+                    <option value="Vaca">Vaca</option>
+                    <option value="Oveja">Oveja</option>
+                    <option value="Caballo">Caballo</option>
+                </select>
+            </div>
+
+            <div class="entrada">
+                <p>Raza:</p>
+                <select name="" id="raza" required>
+                    <option value="Mestizo">Mestizo</option>
+                </select>
+            </div>
+
+            <input type="text" name="" id="edad" placeholder="Edad:" required>
+
+            <div class="entrada">
+                <p>Sexo:</p>
+                <select name="" id="sexo" required>
+                    <option value="Macho">Macho</option>
+                    <option value="Hembra">Hembra</option>
+                </select>
+            </div>
+            
+            <input type="text" name="" id="peso" placeholder="Peso:" required>
+
+            <div class="entrada">
+                <p>Estado actual:</p>
+                <select name="" id="estado" required>
+                    <option value="Saludable">Saludable</option>
+                    <option value="Enfermo">Enfermo</option>
+                    <option value="Muerto">Muerto</option>
+                </select>
+            </div>
+            
+            <input type="number" name="" id="num-visitas" min="1" placeholder="Visitas realizadas" required>
+
+            <div class="entrada">
+                <p>Última visita:</p>
+                <input type="date" name="" id="ultima-visita" required>
+            </div>
+
+            <div class="entrada">
+                <p>Última vacuna:</p>
+                <input type="date" name="" id="ultima-vacuna" required>
+            </div>
+            
+            <div class="entrada">
+                <p>Vacunas:</p>
+                <select name="" id="vacunas" required>
+                    <option value="Rabia">Rabia</option>
+                    <option value="Moquillo">Moquillo</option>
+                    <option value="Influenza">Influenza</option>
+                    <option value="Parvovirus">Parvovirus</option>
+                    <option value="Leptospirosis">Leptospirosis</option>
+                </select> 
+            </div>
+            
+            
+            <div class="entrada">
+                <p>Próxima vacuna:</p>
+                <input type="date" name="" id="siguiente-vacuna_fecha" required>
+            </div>
+
+            <div class="entrada">
+                <p>Próxima vacuna:</p>
+                <select name="" id="siguiente-vacuna_tipo" required>
+                    <option value="Rabia">Rabia</option>
+                    <option value="Moquillo">Moquillo</option>
+                    <option value="Influenza">Influenza</option>
+                    <option value="Parvovirus">Parvovirus</option>
+                    <option value="Leptospirosis">Leptospirosis</option>
+                </select> 
+            </div>
+
+            <textarea name="" id="condiciones" class="padding-txtarea" required placeholder="Condiciones"></textarea>
+
+            <textarea name="" id="tratamientos" class="padding-txtarea" required placeholder="Tratamientos"></textarea>
+            
+            <textarea name="" id="cirugias" class="padding-txtarea" required placeholder="Cirugías"></textarea>
+
+            <input type="password" name="" id="contra" placeholder="Confirmar contraseña" required>
+            
+            <button type="submit" >Registrar mascota</button>
+        </form>
+    </div>
+
+    <div class="pieR">
+        <div class="curva-2"></div>
+        <br><br><br>
+    </div>
+
+</body>
+</html>

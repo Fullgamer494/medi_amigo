@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Html/integrador/estilos/compartidos.css">
+    <link rel="stylesheet" href="/Html/integrador/Sesion/Iniciada/estilos/hogar.css">
+    <script src="/Html/integrador/JavaScript/app.js" type="module"></script>
+    <script type="module" src="/Html/integrador/JavaScript/crearCartasMascota.js"></script>
+    <title>Hogar</title>
+</head>
+<body>
+    <div id="carga"></div>
+
+    <div id="cubrir-pantalla" class="pantalla-carga"></div>
+
+    <div class="contra-cuadro" id="confirmarcontra">
+        <p>Confirme su contraseña para guardar los cambios:</p>
+        <input type="password" name="" id="contra" class="contraseña">
+        <p id="c-err" class="c-err">Contraseña equivocada. Intente de nuevo.</p>
+    </div>
+
+    <div class="contra-cuadro" id="eliminarcuenta">
+        <p>¿Realmente desea eliminar el registro de su mascota?</p>
+        <p>Toda la información asociada a esta será eliminada.</p>
+        <br>
+        <div style="display: flex;">
+            <button type="button" id="eliminar" class="boton-si">Sí, eliminar.</button>
+            <button type="button" id="noeliminar" class="boton-no">No, regresar.</button>
+        </div>
+    </div>
+    <div class="contra-cuadro" id="confirmarcontraelim">
+        <p>Confirme su contraseña para eliminar su mascota:</p>
+        <input type="password" name="" id="contraelim" class="contraseña">
+        <p id="c-err-elim" class="c-err">Contraseña equivocada. Intente de nuevo.</p>
+    </div>
+
+    <header class="encabezado">
+        <div class="raya">
+            <img src="/Html/integrador/imagenes/logo-TEMPORAL.png" alt="Logo" class="logo">
+            <p>Medi-Amigo</p>
+        </div>
+        <div class="curva"></div>
+    </header>
+
+    <div class="perfil">
+
+        <a href="./Perfil.html">
+            <div class="cuadro-perfil">
+                <img src="" alt="" class="pfp" id="fotoPerfil">
+                <p id="name"></p>
+            </div>
+        </a>
+        
+        <a href="./Mascotas.html">
+            <div class="opcion-s">
+                <img src="/Html/integrador/imagenes/dog-paw.png" alt="" class="icono">
+                Mascotas bajo su cuidado
+            </div>
+        </a>
+
+        <a href="./Clinicas.html">
+            <div class="opcion">
+                <img src="/Html/integrador/imagenes/clinic.png" alt="" class="icono">
+                Sus clínicas
+            </div>
+        </a>
+
+        <a href="./Veterinarios.html">
+            <div class="opcion">
+                <img src="/Html/integrador/imagenes/vet.png" alt="" class="icono">
+                Veterinarios
+            </div>
+        </a>
+
+        <a href="/Html/integrador/index.html">
+            <div class="opcion">
+                <img src="/Html/integrador/imagenes/log-out.png" alt="" class="icono">
+                Cerrar sesión
+            </div>
+        </a>
+
+    </div>
+
+    <div class="mascotas-contenedor" id="contenedor-info" style="visibility: hidden;">
+        <div >
+
+            <p class="etiqueta">Nombre:</p>
+            <input type="text" name="" id="nombre" class="entrada-ver-m" disabled>
+
+            <p class="etiqueta">ID:</p>
+            <input type="number" name="" id="id" class="entrada-ver-m" disabled>
+            
+            <p class="etiqueta">Edad:</p>
+            <input type="text" name="" id="edad" class="entrada-ver-m" disabled>
+
+            <p class="etiqueta">Sexo:</p>
+            <input type="text" name="" id="sexo" class="entrada-ver-m" disabled>
+        </div>
+
+        <div style="width: min-content;">
+            <img src="/Html/integrador/imagenes/img.png" alt="" class="vet-foto" style="margin: 0;" id="foto">
+        </div>
+        
+        <div>
+            
+            <p class="etiqueta">Especie:</p>
+            <input type="text" name="" id="especie" class="entrada-ver-m" disabled>
+
+            <p class="etiqueta">Peso:</p>
+            <input type="text" name="" id="peso" class="entrada-ver-m" disabled>
+
+            <p class="etiqueta">Visitas realizadas:</p>
+            <input type="number" name="" id="visitas-tot" class="entrada-ver-m" disabled>
+
+            
+            <p class="etiqueta">Vacunas:</p>
+            <textarea name="" id="vacunas" class="entrada-ver-m-textarea" disabled></textarea>
+
+            <p class="etiqueta">Condiciones:</p>
+            <textarea name="" id="condiciones" class="entrada-ver-m-textarea" disabled></textarea>
+
+            <p class="etiqueta">Próxima vacuna:</p>
+            <select name="" id="prox-vac" class="entrada-ver-m" disabled>
+                <option value="Rabia">Rabia</option>
+                <option value="Moquillo">Moquillo</option>
+                <option value="Influenza">Influenza</option>
+                <option value="Parvovirus">Parvovirus</option>
+                <option value="Leptospirosis">Leptospirosis</option>
+            </select>
+            <input type="date" name="" id="prox-vac-f" class="entrada-ver-m" style="margin-top: 2vh;" disabled>
+            <br><br>
+            <button id="b-eli" class="boton-perfil">
+                <img src="/Html/integrador/imagenes/trash-can.png" alt="" class="icono-boton">
+                Eliminar mascota
+            </button>
+        </div>
+
+        <div class="alinear-izq">
+
+            <p class="etiqueta">Raza:</p>
+            <input type="text" name="" id="raza" class="entrada-ver-m" disabled>
+
+            <p class="etiqueta">Estado:</p>
+            <select name="" id="estado" class="entrada-ver-m" disabled>
+                <option value="Saludable">Saludable</option>
+                <option value="Enfermo">Enfermo</option>
+                <option value="Muerto">Muerto</option>
+            </select>
+
+            <p class="etiqueta">Última visita:</p>
+            <input type="date" name="" id="ult-visita" class="entrada-ver-m" disabled>
+
+            <p class="etiqueta">Última vacuna:</p>
+            <input type="date" name="" id="ult-vac" class="entrada-ver-m" disabled>
+
+            <p class="etiqueta">Tratamiento:</p>
+            <textarea name="" id="tratamientos" class="entrada-ver-m-textarea" disabled></textarea>
+
+            <p class="etiqueta">Cirugías:</p>
+            <textarea name="" id="cirugias" class="entrada-ver-m-textarea" disabled></textarea>
+        </div>
+
+        <div class="panel-cambio">
+            <button id="b-r" class="boton-mascota">
+                <img src="/Html/integrador/imagenes/log-out.png" alt="" class="icono-boton">
+                <span>Regresar</span>
+            </button>
+            <button id="b-e" class="boton-mascota">
+                <img src="/Html/integrador/imagenes/pencil.png" alt="" class="icono-boton">
+                Editar datos
+            </button>
+
+            <button id="b-g" class="boton-mascota" style="visibility: hidden;">
+                <img src="/Html/integrador/imagenes/save.png" alt="" class="icono-boton">
+                Guardar cambios
+            </button>
+
+            <button id="b-c" class="boton-mascota" style="visibility: hidden;">
+                <img src="/Html/integrador/imagenes/cancel.png" alt="" class="icono-boton">
+                Cancelar
+            </button>
+        </div>
+    </div>
+
+    <div class="mascotas-contenedor" id="contenedor-m">
+        
+        <a href="../Mascota/RegistrarMascotaVet.html" class="mascotas-add" id="nueva">
+            <img src="/Html/integrador/imagenes/plus.webp" alt="" style="width: 10%;">
+            <p>Añadir mascota por su dueño.</p>
+            
+        </a>
+    </div>
+
+    <div class="pie">
+        <div class="curva-2"></div>
+        <br><br><br>
+    </div>
+</body>
+</html>

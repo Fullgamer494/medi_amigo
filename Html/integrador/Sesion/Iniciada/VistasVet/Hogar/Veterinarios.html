@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Html/integrador/estilos/compartidos.css">
+    <link rel="stylesheet" href="/Html/integrador/Sesion/Iniciada/estilos/hogar.css">
+    <script src="/Html/integrador/JavaScript/app.js" type="module"></script>
+    <script type="module" src="/Html/integrador/JavaScript/crearCartasVet.js"></script>
+    <title>Hogar</title>
+</head>
+<body><div id="carga"></div>
+    
+    <header class="encabezado" id="head">
+        <div class="raya">
+            <img src="/Html/integrador/imagenes/logo-TEMPORAL.png" alt="Logo" class="logo">
+            <p>Medi-Amigo</p>
+        </div>
+        <div class="curva"></div>
+    </header>
+
+    <div class="perfil">
+
+        <a href="./Perfil.html">
+            <div class="cuadro-perfil">
+                <img src="" alt="" class="pfp" id="fotoPerfil">
+                <p id="name"></p>
+            </div>
+        </a>
+        
+        <a href="./Mascotas.html">
+            <div class="opcion">
+                <img src="/Html/integrador/imagenes/dog-paw.png" alt="" class="icono">
+                Mascotas bajo su cuidado
+            </div>
+        </a>
+
+        <a href="./Clinicas.html">
+            <div class="opcion">
+                <img src="/Html/integrador/imagenes/clinic.png" alt="" class="icono">
+                Sus clínicas
+            </div>
+        </a>
+
+        <a href="./Veterinarios.html">
+            <div class="opcion-s">
+                <img src="/Html/integrador/imagenes/vet.png" alt="" class="icono">
+                Veterinarios
+            </div>
+        </a>
+
+        <a href="/Html/integrador/index.html">
+            <div class="opcion">
+                <img src="/Html/integrador/imagenes/log-out.png" alt="" class="icono">
+                Cerrar sesión
+            </div>
+        </a>
+
+    </div>
+
+    <div class="mascotas-contenedor" id="contenedor-info" style="visibility: visible;">
+        <img src="/Html/integrador/imagenes/empty-pfp.webp" alt="" class="vet-foto" id="img">
+
+        <p class="etiqueta">Nombre:</p>
+        <p id="nombre"></p>
+        
+        <p class="etiqueta">Establecimiento:</p>
+        <p id="lugar"></p>
+        
+        <p class="etiqueta">Especialidad</p>
+        <p id="espec"></p>
+    
+        <p class="etiqueta">Calificación promedio:</p>
+        <p id="calif"></p>
+            
+        <p class="etiqueta">Horas de atención:</p>
+        <p id="horario"></p>
+        
+        <p class="etiqueta">Número telefónico:</p>
+        <p id="num"></p>
+        
+        <p class="etiqueta">Correo electrónico:</p>
+        <p id="correo"></p>
+
+        <p class="etiqueta">Descripción:</p>
+        <textarea name="" id="desc"></textarea>
+        
+        <div class="panel-cambio-fijo">
+            <button id="b-r" class="boton-vet">
+                <img src="/Html/integrador/imagenes/log-out.png" alt="" class="icono-boton">
+                <span>Regresar</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="mascotas-contenedor" id="contenedor"></div>
+
+    <div class="pie">
+        <div class="curva-2"></div>
+        <br><br><br>
+    </div>
+</body>
+</html>
