@@ -51,6 +51,14 @@ public class AppModule {
         return new EstablishmentRoutes(establishmentController);
     }
 
+    // Location dependencies - NUEVO
+    public static LocationRoutes initLocation() {
+        LocationRepository locationRepo = new LocationRepository();
+        LocationService locationService = new LocationService(locationRepo);
+        LocationController locationController = new LocationController(locationService);
+        return new LocationRoutes(locationController);
+    }
+
     // Vaccine dependencies
     public static VaccineRoutes initVaccine() {
         VaccineRepository vaccineRepo = new VaccineRepository();

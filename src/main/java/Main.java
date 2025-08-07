@@ -24,5 +24,6 @@ public class Main {
         AppModule.initEstablishment().register(app);
         AppModule.initVaccine().register(app);
         AppModule.initVaccineRel().register(app);
+        AppModule.initLocation().register(app);
     }
 }
