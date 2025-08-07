@@ -23,8 +23,13 @@
         <form action="../Hogar/Clinicas.html" id="formulario"><h1>Añade los datos de tu establecimiento</h1>
             <input type="text" name="" id="nombre" placeholder="Nombre del establecimiento" required>
             
-            <input type="text" name="" id="ubi" placeholder="Ubicación" required>
-            
+            <div id="ubicaciones-container" class="ubicacion-container">
+                <div class="ubicacion-item">
+                    <input type="text" name="ubicacion[]" placeholder="Ubicación" required>
+                </div>
+            </div>
+            <button type="button" id="agregar-ubicacion">Añadir otra ubicación</button>
+
             <div class="entrada">
                 <p for="">Foto del lugar:</p>
                 <input type="file" name="" id="foto" required>
